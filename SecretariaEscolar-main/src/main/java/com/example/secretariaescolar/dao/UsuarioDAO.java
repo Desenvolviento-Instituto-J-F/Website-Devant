@@ -1,4 +1,5 @@
 package com.example.secretariaescolar.dao;
+
 import com.example.secretariaescolar.model.Usuario;
 import com.example.secretariaescolar.util.Conexao;
 
@@ -13,7 +14,7 @@ public class UsuarioDAO {
         int idGerado = -1;
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getEmail());
@@ -40,7 +41,7 @@ public class UsuarioDAO {
         String sql = "SELECT id_user, nome, email, id_tipo_user FROM Usuario WHERE email = ? AND senha = ?";
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
             stmt.setString(2, senha);
