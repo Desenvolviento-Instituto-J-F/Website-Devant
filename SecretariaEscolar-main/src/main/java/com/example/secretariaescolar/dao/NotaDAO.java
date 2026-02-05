@@ -52,7 +52,7 @@ public class NotaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()){
-                    Nota nota = new Nota(idAluno, sql, idAluno, sql, idAluno, idAluno);
+                    Nota nota = new Nota();
 
                     nota.setId_nota(rs.getInt("id_nota"));
                     nota.setTitulo(rs.getString("titulo"));
@@ -108,7 +108,7 @@ public class NotaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while(rs.next()){
-                    Nota nota = new Nota(idProfessorDisciplina, sql, idProfessorDisciplina, sql, idProfessorDisciplina, idProfessorDisciplina);
+                    Nota nota = new Nota();
 
                     nota.setId_nota(rs.getInt("id_nota"));
                     nota.setTitulo(rs.getString("titulo"));
@@ -136,7 +136,7 @@ public class NotaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Nota nota = new Nota(idNota, sql, idNota, sql, idNota, idNota);
+                    Nota nota = new Nota();
 
                     nota.setId_nota(rs.getInt("id_nota"));
                     nota.setTitulo(rs.getString("titulo"));

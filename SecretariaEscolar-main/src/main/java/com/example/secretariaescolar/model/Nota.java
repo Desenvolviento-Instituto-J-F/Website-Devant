@@ -9,13 +9,8 @@ public class Nota {
     private int id_aluno;
     private int id_professorDisciplina;
 
-    public Nota(int id_nota, String titulo, double valor, String semestre, int id_aluno, int id_professorDisciplina) {
-        this.id_nota = id_nota;
-        this.titulo = titulo;
-        this.valor = valor;
-        this.semestre = semestre;
-        this.id_aluno = id_aluno;
-        this.id_professorDisciplina = id_professorDisciplina;
+    public Nota() {
+       
     }
 
     public int getId_nota() {
