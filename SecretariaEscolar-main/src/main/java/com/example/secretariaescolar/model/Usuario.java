@@ -1,6 +1,7 @@
 package com.example.secretariaescolar.model;
 
 public class Usuario {
+    private int id_user;
     private String nome;
     private String email;
     private String senha;
@@ -13,8 +14,16 @@ public class Usuario {
         this.id_tipoUser = id_tipoUser;
     }
 
+    public Usuario() {
+
+    }
+
     public String getNome() {
         return nome;
+    }
+
+    public int getId_user() {
+        return id_user;
     }
 
     public String getEmail() {
@@ -31,6 +40,10 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public void setEmail(String email) {

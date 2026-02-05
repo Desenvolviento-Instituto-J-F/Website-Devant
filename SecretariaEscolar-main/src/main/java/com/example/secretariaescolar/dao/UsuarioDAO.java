@@ -3,7 +3,6 @@ package com.example.secretariaescolar.dao;
 import com.example.secretariaescolar.model.Usuario;
 import com.example.secretariaescolar.util.Conexao;
 
-import java.net.FileNameMap;
 import java.sql.*;
 
 import java.sql.Connection;

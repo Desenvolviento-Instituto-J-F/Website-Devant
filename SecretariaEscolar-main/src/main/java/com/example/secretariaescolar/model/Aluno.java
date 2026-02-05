@@ -1,21 +1,25 @@
 package com.example.secretariaescolar.model;
 
-public class Aluno {
+public class Aluno extends Usuario {
     private int idAluno;
-    private int matricula;
+    private String matricula;
     private int idTurma;
 
-    public Aluno(int idAluno, int matricula, int idTurma) {
+    public Aluno(int idAluno, String matricula, int idTurma, String nome, String email, String senha, int id_tipoUser) {
+        super(nome, email, senha, id_tipoUser);
         this.idAluno = idAluno;
         this.matricula = matricula;
         this.idTurma = idTurma;
+    }
+
+    public Aluno() {
     }
 
     public int getIdAluno() {
         return idAluno;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
@@ -27,7 +31,7 @@ public class Aluno {
         this.idAluno = idAluno;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
