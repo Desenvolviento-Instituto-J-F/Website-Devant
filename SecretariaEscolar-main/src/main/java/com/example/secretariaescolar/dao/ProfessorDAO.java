@@ -18,8 +18,10 @@ import com.example.secretariaescolar.util.Conexao;
 public class ProfessorDAO {
     // buscarPorUsuario(id_user): Retorna os dados do professor logado.
     public Professor buscaPorUsuario(int id_user) {
-        String sql = "SELECT u.id_user, u.nome, u.email, p.id_professor FROM Usuario u " +
-                "INNER JOIN Professor p ON u.id_user = p.id_user WHERE u.id_user = ?";
+        String sql = "SELECT u.id_user, u.nome, u.email, u.senha, p.id_professor, p.user " +
+                "FROM Usuario u " +
+                "INNER JOIN Professor p ON u.id_user = p.id_user " +
+                "WHERE u.id_user = ?";
 
         try (Connection conn = Conexao.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -32,7 +34,10 @@ public class ProfessorDAO {
                     professor.setId_user(rset.getInt("id_user"));
                     professor.setNome(rset.getString("nome"));
                     professor.setEmail(rset.getString("email"));
+                    professor.setSenha(rset.getString("senha"));
                     professor.setId_professor(rset.getInt("id_professor"));
+                    professor.setLogin(rset.getString("login"));
+
                     return professor;
                 }
             }
