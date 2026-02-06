@@ -5,9 +5,8 @@ public class Turma {
     private int id_turma;
     private String nome;
 
-    public Turma(int id_turma, String nome) {
-        this.id_turma = id_turma;
-        this.nome = nome;
+    public Turma() {
+
     }
 
     public int getId_turma() {
@@ -26,4 +25,3 @@ public class Turma {
         this.nome = nome;
     }
 }
-

@@ -23,18 +23,20 @@ public class AlunoDAO {
 
         if (idGerado > 0) {
             aluno.setId_user(idGerado);
-
-            String sql = "INSERT INTO Aluno (id_user, matricula) VALUES (?, ?)";
+            String sql = "INSERT INTO Aluno (id_user, matricula, id_turma) VALUES (?, ?, ?)";
 
             try (Connection conn = Conexao.conectar();
                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
                 pstmt.setInt(1, aluno.getId_user());
                 pstmt.setString(2, aluno.getMatricula());
+                pstmt.setInt(3, aluno.getIdTurma());
+
                 pstmt.executeUpdate();
                 System.out.println("Aluno cadastrado com sucesso! ID Usuario: " + idGerado);
+
             } catch (SQLException e) {
                 System.err.println("Erro ao inserir na tabela Aluno: " + e.getMessage());
-
             }
         } else {
             System.err.println("Erro: Não foi possível criar a base de Usuário.");
@@ -55,7 +57,7 @@ public class AlunoDAO {
             try (ResultSet rset = pstmt.executeQuery()) {
                 if (rset.next()) {
                     Aluno aluno = new Aluno();
-                    aluno.setId_user(rset.getInt("id_user"));
+                    aluno.setId_user(rset.getInt("id_aluno"));
                     aluno.setNome(rset.getString("nome"));
                     aluno.setLogin(rset.getString("login"));
                     aluno.setSenha(rset.getString("senha"));
