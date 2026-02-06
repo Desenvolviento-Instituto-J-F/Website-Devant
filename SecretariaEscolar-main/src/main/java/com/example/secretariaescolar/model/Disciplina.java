@@ -3,14 +3,15 @@ package com.example.secretariaescolar.model;
 public class Disciplina {
 
     private int id_disciplina;
-    private String nome_disciplina;
+    private String nome;
 
-    public Disciplina() {
+    public Disciplina(int id_disciplina) {
+        this.id_disciplina = id_disciplina;
     }
 
-    public Disciplina(int id_disciplina, String nome_disciplina) {
+    public Disciplina(int id_disciplina, String nome) {
         this.id_disciplina = id_disciplina;
-        this.nome_disciplina = nome_disciplina;
+        this.nome = nome;
     }
 
     public int getId_disciplina() {
@@ -22,10 +23,10 @@ public class Disciplina {
     }
 
     public String getNome() {
-        return nome_disciplina;
+        return nome;
     }
 
-    public void setNome(String nome_disciplina) {
-        this.nome_disciplina = nome_disciplina;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

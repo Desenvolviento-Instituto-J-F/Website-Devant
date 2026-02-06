@@ -1,14 +1,16 @@
 package com.example.secretariaescolar.model;
 
+import java.time.LocalDate;
+
 public class Observacao {
 
     private int id_observacao;
     private String mensagem;
-    private String data;
+    private LocalDate data;
     private int id_aluno;
     private int id_professor;
 
-    public Observacao(int id_observacao, String mensagem, String data, int id_aluno, int id_professor) {
+    public Observacao(int id_observacao, String mensagem, LocalDate data, int id_aluno, int id_professor) {
         this.id_observacao = id_observacao;
         this.mensagem = mensagem;
         this.data = data;
@@ -32,11 +34,11 @@ public class Observacao {
         this.mensagem = mensagem;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
