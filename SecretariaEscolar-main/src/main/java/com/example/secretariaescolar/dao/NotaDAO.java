@@ -10,7 +10,7 @@ import com.example.secretariaescolar.util.Conexao;
 public class NotaDAO {
 
     public int inserir(Nota nota) {
-        String sql = "INSERT INTO Nota (titulo, valor, semestre, id_aluno, id_professor-disciplina) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Nota (titulo, valor, semestre, id_aluno, id_professor, id_disciplina) VALUES (?,?,?,?,?,?)";
         int idGerado = -1;
 
         try (Connection conn = Conexao.conectar();
@@ -20,7 +20,8 @@ public class NotaDAO {
             stmt.setDouble(2, nota.getValor());
             stmt.setString(3, nota.getSemestre());
             stmt.setInt(4, nota.getId_aluno());
-            stmt.setInt(5, nota.getId_professorDisciplina());
+            stmt.setInt(5, nota.getId_professor());
+            stmt.setInt(6, nota.getId_disciplina());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -58,7 +59,8 @@ public class NotaDAO {
                     nota.setSemestre(rs.getString("semestre"));
                     nota.setValor(rs.getDouble("valor"));
                     nota.setId_aluno(rs.getInt("id_aluno"));
-                    nota.setId_professorDisciplina(rs.getInt("id_professor_disciplina"));
+                    nota.setId_professor(rs.getInt("id_professor"));
+                    nota.setId_disciplina(rs.getInt("id_disciplina"));
 
                     notas.add(nota);
 
@@ -94,15 +96,15 @@ public class NotaDAO {
         }
     }
 
-    public List<Nota> listarPorProfessorDisciplina(int idProfessorDisciplina) {
+    public List<Nota> listarPorDisciplina(int idDisciplina) {
         List<Nota> notas = new ArrayList<>();
 
-        String sql = "SELECT * FROM Nota WHERE id_professor-disciplina = ?";
+        String sql = "SELECT * FROM Nota WHERE id_disciplina = ?";
 
         try (Connection conn = Conexao.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, idProfessorDisciplina);
+            stmt.setInt(1, idDisciplina);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -113,7 +115,8 @@ public class NotaDAO {
                     nota.setValor(rs.getDouble("valor"));
                     nota.setSemestre(rs.getString("semestre"));
                     nota.setId_aluno(rs.getInt("id_aluno"));
-                    nota.setId_professorDisciplina(rs.getInt("id_professor_disciplina"));
+                    nota.setId_professor(rs.getInt("id_professor"));
+                    nota.setId_disciplina(rs.getInt("id_disciplina"));
 
                     notas.add(nota);
                 }
@@ -141,7 +144,8 @@ public class NotaDAO {
                     nota.setValor(rs.getDouble("valor"));
                     nota.setSemestre(rs.getString("semestre"));
                     nota.setId_aluno(rs.getInt("id_aluno"));
-                    nota.setId_professorDisciplina(rs.getInt("id_professor_disciplina"));
+                    nota.setId_professor(rs.getInt("id_professor"));
+                    nota.setId_disciplina(rs.getInt("id_disciplina"));
 
                     return nota;
                 }
