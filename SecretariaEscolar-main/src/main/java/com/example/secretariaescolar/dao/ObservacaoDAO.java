@@ -15,16 +15,14 @@ public class ObservacaoDAO {
 
     // Professor envia observação para o aluno
     public void salvar(Observacao observacao) {
-        String sql = """
-            INSERT INTO observacao (mensagem, data, id_aluno, id_professor)
-            VALUES (?, ?, ?, ?)
-        """;
+        String sql = "INSERT INTO observacao (mensagem, data, id_aluno, id_professor, id_disciplina) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, observacao.getMensagem());
             stmt.setDate(2, Date.valueOf(observacao.getData()));
             stmt.setInt(3, observacao.getId_aluno());
             stmt.setInt(4, observacao.getId_professor());
+            stmt.setInt(5, observacao.getId_disciplina());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -47,13 +45,15 @@ public class ObservacaoDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Observacao obs = new Observacao(
-                        rs.getInt("id_observacao"),
-                        rs.getString("mensagem"),
-                        rs.getDate("data").toLocalDate(),
-                        rs.getInt("id_aluno"),
-                        rs.getInt("id_professor")
-                );
+                Observacao obs = new Observacao();
+
+                obs.setId_observacao(rs.getInt("id_observacao"));
+                obs.setMensagem(rs.getString("mensagem"));
+                obs.setData(rs.getDate("data").toLocalDate());
+                obs.setId_aluno(rs.getInt("id_aluno"));
+                obs.setId_professor(rs.getInt("id_professor"));
+                obs.setId_disciplina(rs.getInt("id_disciplina"));
+
                 observacoes.add(obs);
             }
         } catch (SQLException e) {
@@ -64,29 +64,32 @@ public class ObservacaoDAO {
     }
 
     // Professor visualiza observações que enviou (opcional)
-    public List<Observacao> listarPorProfessor(int idProfessor) {
+    public List<Observacao> listarPorDisciplina(int idDisciplina) {
         List<Observacao> observacoes = new ArrayList<>();
 
         String sql = """
             SELECT * FROM observacao
-            WHERE id_professor = ?
+            WHERE id_disciplina = ?
             ORDER BY data DESC
         """;
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idProfessor);
+            stmt.setInt(1, idDisciplina);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Observacao obs = new Observacao(
-                        rs.getInt("id_observacao"),
-                        rs.getString("mensagem"),
-                        rs.getDate("data").toLocalDate(),
-                        rs.getInt("id_aluno"),
-                        rs.getInt("id_professor")
-                );
+                Observacao obs = new Observacao();
+
+                obs.setId_observacao(rs.getInt("id_observacao"));
+                obs.setMensagem(rs.getString("mensagem"));
+                obs.setData(rs.getDate("data").toLocalDate());
+                obs.setId_aluno(rs.getInt("id_aluno"));
+                obs.setId_professor(rs.getInt("id_professor"));
+                obs.setId_disciplina(rs.getInt("id_disciplina"));
+
                 observacoes.add(obs);
             }
+
         } catch (SQLException e) {
             System.out.println("Erro ao visualizar as observações enviadas: " + e.getMessage());
         }
